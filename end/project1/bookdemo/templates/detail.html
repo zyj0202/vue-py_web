@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>这里是详情页</title>
+</head>
+<body>
+    <h2>书名：{{book.title}}</h2>
+    <ul>
+        {% for hero in book.hero_set.all %}
+            <li>
+                {{hero.name}}---{{hero.gender}}----{{hero.content}}
+            </li>
+        {% endfor %}
+    </ul>
+    {# <a href="/">返回列表页</a> #}
+    <a href="{% url 'booktest:index' %}">返回列表页</a>
+
+</body>
+</html>

@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 想要使用应用的模型类，需要在此配置文件注册该应用
+    'booktest',
 ]
 
 MIDDLEWARE = [
@@ -53,7 +55,8 @@ ROOT_URLCONF = 'bookdemo.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        # 在dirs中配置自己的模板目录
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -71,7 +74,8 @@ WSGI_APPLICATION = 'bookdemo.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
+# DATABASES 可以配置项目的数据库
+# 默认使用的是关系型数据库sqlite，轻量级数据库 仅有一个文件 db.sqlite3
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -117,3 +121,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+# 配置静态文件
+STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
+
