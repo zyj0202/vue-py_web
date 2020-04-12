@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # 使用path将booktest下的urls进行包含,命名空间的值与应用设置的应用名一致
     path('',include('booktest.urls',namespace='booktest'))
+
 ]
 
 

@@ -19,7 +19,7 @@
                     <li>
                         {# <a href="/detail/{{book.id}}"> </a> 这是注释#}
                         <a href="{% url 'booktest:detail' book.id %}">{{book.id}}--{{book}}</a>
-                        <a href="{% url 'booktest:delete' book.id %}">删除</a>
+                        <a href="{% url 'booktest:deletebook' book.id %}">删除</a>
                     </li>
 
 

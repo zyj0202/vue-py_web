@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑英雄</title>
+</head>
+<body>
+    {# action的#代表是当前页面的路由  #}
+    <form action="#" method="post">
+        英雄的名字：<input name="heroname" value="{{hero.name}}" type="text">
+    <br>
+        英雄的技能：<input type="text" value="{{hero.content}}" name="herocontent">
+    <br>
+        {# 在h5里面的单选框checked='true'可以简写成checked #}
+        {% if hero.gender == 'male' %}
+            英雄的性别：<input type="radio" value="female" name="sex">女 <input type="radio" name="sex" value="male" checked>男
+        {% else %}
+            英雄的性别：<input type="radio" value="female" name="sex" checked>女 <input type="radio" name="sex" value="male">男
+        {% endif %}
+    <br>
+        <input type="submit" value="提交">
+
+
+
+
+
+
+    </form>
+
+
+
+
+</body>
+</html>
