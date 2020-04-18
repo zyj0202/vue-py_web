@@ -18,26 +18,21 @@
 #                    `=---='
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 #             佛祖保佑       永无BUG
-# 引入路由绑定函数
+
 from django.conf.urls import url
 from . import views
 
 
-app_name = 'booktest'
+app_name = 'polls'
 
 urlpatterns = [
-    # r在正则代表原始字符串
-    # 传入路由地址和视图函数,name给路由命名 解除硬编码
-    # url(r'^index$',views.index),去掉index字符
     url(r'^$',views.index,name='index'),
-    # url(r'^category/$',views.category,name='category'),
-    # url(r'^mine/$', views.mine,name='mine'),
     url(r'^detail/(\d+)/$',views.detail,name='detail'),
-    url(r'^delete/(\d+)/$', views.deletebook, name='deletebook'),
-    url(r'^deletehero/(\d+)$', views.deletehero, name='deletehero'),
-    url(r'^addhero/(\d+)$', views.addhero, name='addhero'),
-    url(r'^edithero/(\d+)$',views.edithero,name='edithero')
-]
+    url(r'^result/(\d+)/$',views.result,name='result'),
+    url(r'^login/$',views.login,name="login"),
+    url(r'^register/$',views.register,name="register"),
+    url(r'^logout/$',views.logout,name="logout")
 
+]
 
 

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票详情页</title>
+</head>
+<body>
+    <div class="container">
+        <h2>投票的问题为：{{question.title}}</h2>
+        <ul>
+            <h3>选项有</h3>
+            <form action="#" method="post">
+                 {# 通过csrf_token 进行携带cookie的csrf_token信息 #}
+                 {% csrf_token %}
+                 {% for c in question.choices.all %}
+                    {% if forloop.counter == 1 %}
+                        <li><input type="radio" checked name="num" value="{{c.id}}">{{c.content}}</li>
+                    {% else %}
+                        <li><input type="radio" name="num" value="{{c.id}}">{{c.content}}</li>
+                    {% endif %}
+                 {% endfor %}
+                <input type="submit" value="投票">
+            </form>
+
+        </ul>
+
+    </div>
+
+
+</body>
+</html>

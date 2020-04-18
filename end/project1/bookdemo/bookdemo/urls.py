@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-
+# from django.views.static import serve  #使用媒体资源
+# from .settings import MEDIA_ROOT
 # 路由 网址  每一个路由都需要对应的视图函数 视图函数做返回页面内容
 #  MVT  V是视图函数  三个作用：接受请求  处理数据 返回响应
 
@@ -23,8 +24,17 @@ from django.urls import path,include
 # 总的路由匹配文件
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('polls/',include('polls.urls',namespace='polls')),
+    path('download/',include('download.urls',namespace='download')),
+    # path('head/(?P<path>)/', serve, {'document_root': MEDIA_ROOT}),
     # 使用path将booktest下的urls进行包含,命名空间的值与应用设置的应用名一致
     path('',include('booktest.urls',namespace='booktest'))
+
+
+    # 媒体资源(媒体资源)
+    # path('<path:path>', serve, {'document_root': '/path/to/my/files/'})
+
+
 
 ]
 

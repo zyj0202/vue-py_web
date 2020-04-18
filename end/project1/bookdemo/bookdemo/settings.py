@@ -23,9 +23,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'jw^h6cn_j%0o^4=yuv71@cr%)p#(h_hd*7cean%@a!jqfl76m@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+
 DEBUG = True
 
 ALLOWED_HOSTS = []
+# 为True就是开启了debug模式，上线后需要改为Flase,才能显示4,5类的模板
+# DEBUG = False
+# 当改为了Flase，要设置ALLOWED_HOSTS = []  代表那些域名ip的电脑可以访问服务*为所有
+# ALLOWED_HOSTS = ["*"]
 # django的配置文件，我们要配置一些功能，需要在本文件中编写
 # Application definition
 
@@ -38,13 +43,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 想要使用应用的模型类，需要在此配置文件注册该应用
     'booktest',
+    'polls',
+    'download'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    # csrf中间件 检测post是否携带csrftoken信息，防止模板跨站
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -123,4 +131,13 @@ USE_TZ = True
 STATIC_URL = '/static/'
 # 配置静态文件
 STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
+
+
+# 媒体资源配置项
+# MEIDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+# MEDIAFILES_DIRS = [os.path.join(BASE_DIR,'media')]
+
+# 使用自定义的用户类作为django的认证类需要使用配置
+AUTH_USER_MODEL = 'polls.User'
 
