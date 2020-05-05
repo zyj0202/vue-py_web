@@ -1,0 +1,5 @@
+#支持正则匹配忽略路径
+end/project1/.idea/
+end/project1/venv/
+end/demo2/.idea
+end/demo2/venv/
