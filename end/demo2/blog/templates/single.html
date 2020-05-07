@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load myfun %}
+{% block title %}
+博客实战文章页
+{% endblock %}
+{% block main %}
+<main class="col-md-8">
+
+    <article class="post post-1">
+        <header class="entry-header">
+            <h1 class="entry-title">{{article.title}}</h1>
+            <div class="entry-meta">
+                <span class="post-category"><a href="#">{{article.category.name}}</a></span>
+                <span class="post-date"><a href="#"><time class="entry-date"
+                                                          datetime="2012-11-09T23:15:57+00:00">{{article.create_name|date:'Y-m-d'}}</time></a></span>
+                <span class="post-author"><a href="#">{{article.author}}</a></span>
+                <span class="comments-link"><a href="#">{{article.comment_set.count}}评论</a></span>
+                <span class="views-count"><a href="#">{{article.views}} 阅读</a></span>
+            </div>
+        </header>
+        <div class="entry-content clearfix">
+            {{article.body|safe}}
+        </div>
+    </article>
+    <section class="comment-area" id="comment-area">
+        <hr>
+        <h3>发表评论</h3>
+        <form action="#" method="post" class="comment-form">
+            {% csrf_token %}
+            <div class="row">
+                {% comment %}
+                    <div class="col-md-4">
+                        <label for="id_name">名字：</label>
+                        <input type="text" id="id_name" name="name" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="id_email">邮箱：</label>
+                        <input type="email" id="id_email" name="email" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="id_url">网址：</label>
+                        <input type="text" id="id_url" name="url">
+                    </div>
+                    <div class="col-md-12">
+                        <label for="id_comment">评论：</label>
+                        <textarea name="comment" id="id_comment" required></textarea>
+                        <button type="submit" class="comment-btn">发表</button>
+                    </div>
+                {% endcomment %}
+                <div class="col-md-4">
+                    <label>{{cf.name.label}}</label>
+                    {{cf.name}}
+                </div>
+                <div class="col-md-4">
+                    <label>{{cf.email.label}}</label>
+                    {{cf.email}}
+                </div>
+                <div class="col-md-4">
+                     <label>{{cf.url.label}}</label>
+                     {{cf.url}}
+                </div>
+                <div class="col-md-12">
+                     <label>{{cf.body.label}}</label>
+                     {{cf.body}}
+                    <button type="submit" class="comment-btn">发表</button>
+                </div>
+            </div>    <!-- row -->
+        </form>
+        <div class="comment-list-panel">
+            <h3>评论列表，共 <span>{{a.comment_set.count}}</span> 条评论</h3>
+            <ul class="comment-list list-unstyled">
+                {% for c in article.comment_set.all%}
+                    <li class="comment-item">
+                        <span class="nickname">{{c.name}}</span>
+                        <time class="submit-date" datetime="2012-11-09T23:15:57+00:00">{{c.create_time|dateFormat}}</time>
+                        <div class="text">
+                             {{c.body}}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+
+
+</main>
+{% endblock %}
+{% block aside %}
+    <aside class="col-md-4">
+        <div class="widget widget-recent-posts">
+            <h3 class="widget-title">最新文章</h3>
+            {% get_laestarticles as latest_articles %}
+            <ul>
+                {% for article in latest_articles %}
+                <li>
+                    <a href="{% url 'blogapp:detail' article.id %}">{{article.title}}</a>
+                </li>
+               {% endfor %}
+            </ul>
+        </div>
+        <div class="widget widget-archives">
+            <h3 class="widget-title">归档</h3>
+            {% get_latest_dates as laest_dates %}
+            <ul>
+                {% for date in laest_dates %}
+                    <li>
+                        <a href="/?type=date&year={{date.year}}&month={{date.month}}">{{date.year}} 年 {{date.month}} 月</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="widget widget-category">
+            <h3 class="widget-title">分类</h3>
+            {% get_categoys as categorys %}
+            <ul>
+                {% for c in categorys %}
+                    <li>
+                        <a href="/?type=category&category_id={{c.id}}">{{c.name}}<span class="post-count">({{c.article_set.count}})</span></a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="widget widget-tag-cloud">
+            <h3 class="widget-title">标签云</h3>
+            {% get_tags as tags %}
+            <ul>
+                {% for t in tags %}
+                    <li>
+                        <a href="/?type=tag&tag_id={{t.id}}">{{t.name}}</a>
+                    </li>
+                {% endfor %}
+
+            </ul>
+        </div>
+        <div class="rss">
+            <a href=""><span class="ion-social-rss-outline"></span> RSS 订阅</a>
+        </div>
+    </aside>
+{% endblock%}
+
+
+
