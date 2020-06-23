@@ -81,9 +81,19 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # },
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # 找到django的项目自带的数据库模块，也可以安装第三方数据库模块 修改ENGINE的模块路径
+        'ENGINE': 'django.db.backends.mysql',
+    # NAME为数据库的名字，mysql的数据库一定要手动创建好 create database 数据库名字 charset=utf8;
+        'NAME': 'blog',
+        'USER':'root', #用户名
+        'PASSWORD':'123456', #密码
+        #'HOST':'localhost',  #远程数据库写ip  本机localhost 默认是本机 可以不写该字段0
+        #'PORT':'3306'  #数据库的端口号  默认是3306 没改可不写
     }
 }
 
